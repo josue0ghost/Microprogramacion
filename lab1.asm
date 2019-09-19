@@ -3,7 +3,7 @@
 ; variable que contiene el texto que queremos mostrar
 nombre DB 'Nombre: Emmanuel$' ;$ delimita el final de una cadena
 carnet DB 'Carnet: 1109117$'
-texto DB 'El caracter escogido fue: $'
+texto DB 'El caracter escogido: $'
 
 .STACK
 .CODE
@@ -25,6 +25,10 @@ INT 21h
 MOV DX, OFFSET carnet   ;asignando a DX la variable cadena
 MOV AH, 09h             ;decimos que se imprimira una cadena
 INT 21h                 ;ejecuta la interrupcion, imprime cadena
+
+MOV DL, 10
+MOV AH, 02h
+INT 21h
 
 MOV DX, OFFSET texto
 MOV AH, 09h
