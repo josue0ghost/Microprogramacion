@@ -3,7 +3,7 @@
     num1 DB ?
     num2 DB ?
     
-    str1 DB 'Ingrese un numero luego presione ENTER: $'
+    str1 DB 'Ingrese un numero: $'
     suma DB 'Suma: $'
     rest DB 'Resta: $'
     mult DB 'Multiplicacion: $'
