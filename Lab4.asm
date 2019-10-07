@@ -5,8 +5,8 @@
     residuo DB ?
     
     str1 DB 'Ingrese un numero: $'
-    espar DB 'El numero es par$'
-    nopar DB 'El numero es impar$'
+    espar DB 'El numero es par ^^$'
+    nopar DB 'El numero es impar ^^$'
     dos DB 02h
 .code
 program:
@@ -35,6 +35,9 @@ program:
     jnz impar
     
     par:
+    mov dl, 0dh
+    mov ah, 02h
+    int 21h
     mov dl, 0ah
     mov ah, 02h
     int 21h
@@ -45,6 +48,9 @@ program:
     jmp fin
     
     impar:
+    mov dl, 0dh
+    mov ah, 02h
+    int 21h
     mov dl, 0ah
     mov ah, 02h
     int 21h
