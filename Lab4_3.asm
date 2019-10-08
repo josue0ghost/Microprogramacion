@@ -53,9 +53,8 @@ program:
     
     print_mult:
     add bl, num1            ; sumas sucesivas
-    dec cx
-    jnz print_mult
-    
+    loop print_mult
+
     ;separo los dijitos
     xor ax, ax
     mov al, bl
