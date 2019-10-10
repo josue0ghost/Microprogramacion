@@ -51,9 +51,10 @@ program:
     mov cl, num2            ;contador  = multiplicador
     xor bx, bx
     
-    print_mult:
+    ;MULTIPLICACION
+    sumas:
     add bl, num1            ; sumas sucesivas
-    loop print_mult
+    loop sumas
 
     ;separo los dijitos
     xor ax, ax
@@ -82,47 +83,47 @@ program:
     int 21h     
     
     xor bx, bx
-    mov bl, num1            ;iniciamos bl con num1
+    mov bl, num1                ;iniciamos bl con num1
+    xor cx, cx
+    ; DIVISION
+    restas:
+    cmp bl, num2
+    jl imp_division             ; si num2 es mayor, ya no se puede restar mas
+    sub bl, num2                ; restas sucesivas
+    add cl, 01h                 ; se suma uno al cociente
+    jmp restas
     
-    print_division:
-    cmp bl, 0h
-    jle imprime             ;si es menor que 0 imprime cociente y residuo
+    imp_division:
+    mov cociente, cl
+    mov residuo, bl
     
-    sub bl, num2            ;restas sucesivas
-    inc bh                  ; en bl se guarda el residuo y en bh el cociente
+    add cociente, 30h           ; para obtener ascii del numero
+    add residuo, 30h
     
-    jmp print_division
-    
-    imprime:
     mov dl, 0dh
-    mov ah, 2h
+    mov ah, 02h
     int 21h
     mov dl, 0ah
-    mov ah, 2h
     int 21h
-    mov dx, offset divi    
+    
+    mov dl, offset divi         ; impresion de cociente
     mov ah, 09h
     int 21h
-    
-    add bh, 30h             ;impresion de resultado
-    mov dl, bh
-    mov ah, 2h
+    mov dl, cociente
+    mov ah, 02h
     int 21h
     
-    print_residuo:
     mov dl, 0dh
-    mov ah, 2h
+    mov ah, 02h
     int 21h
     mov dl, 0ah
-    mov ah, 2h
-    int 21h
-    mov dx, offset resi 
-    mov ah, 09h
     int 21h
     
-    add bl, 30h             ;impresion de resutado
-    mov dl, bl
-    mov ah, 2h
+    mov dl, offset resi         ; impresion residuo
+    mov ah, 09h
+    int 21h
+    mov dl, residuo
+    mov ah, 02h
     int 21h
     
     fin:
