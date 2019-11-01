@@ -1,12 +1,16 @@
 .model small
-.stack
 .data
     num1 DB ?
     num2 DB ?
     
     str1 DB 'Ingrese un numero: $'
+.stack
 .code
 program:
+    xor ax, ax
+    xor bx, bx
+    xor cx, cx
+    
     mov ax, @data
     mov ds, ax
     
