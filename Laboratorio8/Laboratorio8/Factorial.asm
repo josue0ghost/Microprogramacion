@@ -71,9 +71,9 @@ main proc
 	jge error			;si es mayor, muestra el error
 
 	CalcFactorial bl, resultado
-	invoke StdOut, addr str2
-	print str$(resultado),10,13
-	jmp fin
+	invoke StdOut, addr str2		; debido a que un factorial de un numero de 2 dígitos de por sí
+	print str$(resultado),10,13		; ya es muy grande, muestra fallas en la impresion del resultado
+	jmp fin							; (tomemos en cuenta que 13! ya supera a la cantidad de segundos que hay en un año terrestre)
 
 	error:
 	invoke StdOut, addr err
